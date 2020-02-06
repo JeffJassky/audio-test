@@ -40,3 +40,8 @@ Name:Bank:Port CNF OE OUT IN INT_STA INT_ENB INT_LVL
  J: 2:1 00 00 00 00 00 00 000000
 BB: 6:3 00 00 00 00 00 00 000000
 
+arecord -D hw:tegrasndt210ref,0 -f s24_le -c 2 -r 48000 -d 10 /tmp/i2s4_test.wav
+
+
+
+ arecord -D hw:tegrasndt210ref,0 -r 48000 -f S16_LE -c 1 -d 10 test.wav
