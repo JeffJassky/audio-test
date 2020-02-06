@@ -35,3 +35,8 @@ card 1: tegrasndt210ref [tegra-snd-t210ref-mobile-rt565x], device 9: ADMAIF10 CI
 arecord -D hw:tegrasndt210ref,0 -f s24_le -c 2 -r 48000 -d 10 /tmp/i2s4_test.wav
 
 sudo grep "Name:\|J:\|BB:" /sys/kernel/debug/tegra_gpio
+
+Name:Bank:Port CNF OE OUT IN INT_STA INT_ENB INT_LVL
+ J: 2:1 00 00 00 00 00 00 000000
+BB: 6:3 00 00 00 00 00 00 000000
+
