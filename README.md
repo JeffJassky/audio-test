@@ -104,3 +104,94 @@ Card #1
 			Part of profile(s): input:analog-mono, input:analog-stereo, output:analog-mono+input:analog-mono, output:analog-mono+input:analog-stereo, output:analog-stereo+input:analog-mono, output:analog-stereo+input:analog-stereo
 		analog-output: Analog Output (priority: 9900, latency offset: 0 usec)
 			Part of profile(s): output:analog-mono, output:analog-mono+input:analog-mono, output:analog-mono+input:analog-stereo, output:analog-stereo, output:analog-stereo+input:analog-mono, output:analog-stereo+input:analog-stereo
+			
+			
+			dmesg | grep DTS
+[    0.216357] DTS File Name: /dvs/git/dirty/git-master_linux/kernel/kernel-4.9/arch/arm64/boot/dts/../../../../../../hardware/nvidia/platform/t210/porg/kernel-dts/tegra210-p3448-0000-p3449-0000-b00.dts
+[    0.432360] DTS File Name: /dvs/git/dirty/git-master_linux/kernel/kernel-4.9/arch/arm64/boot/dts/../../../../../../hardware/nvidia/platform/t210/porg/kernel-dts/tegra210-p3448-0000-p3449-0000-b00.dts
+
+
+
+sudo cat /sys/kernel/debug/pinctrl/7000e400.pmc/pinconf-pins
+Pin config settings per pin
+Format: pin (name): configs
+pin 0 (audio): pin low power (0 mode)
+		Pad voltage 1800000uV
+		Switching voltage: Disable
+pin 1 (audio-hv): pin low power (0 mode)
+		Pad voltage 1800000uV
+		Switching voltage: Disable
+pin 2 (cam): pin low power (0 mode)
+		Pad voltage 1800000uV
+		Switching voltage: Disable
+pin 3 (csia): pin low power (0 mode)
+pin 4 (csib): pin low power (0 mode)
+pin 5 (csic): pin low power (0 mode)
+pin 6 (csid): pin low power (0 mode)
+pin 7 (csie): pin low power (0 mode)
+pin 8 (csif): pin low power (0 mode)
+pin 9 (dbg): pin low power (0 mode)
+		Pad voltage 1800000uV
+		Switching voltage: Disable
+pin 10 (debug-nonao): pin low power (0 mode)
+pin 11 (dmic): pin low power (0 mode)
+		Pad voltage 1800000uV
+		Switching voltage: Disable
+pin 12 (dp): pin low power (0 mode)
+pin 13 (dsi): pin low power (0 mode)
+pin 14 (dsib): pin low power (0 mode)
+pin 15 (dsic): pin low power (0 mode)
+pin 16 (dsid): pin low power (0 mode)
+pin 17 (emmc): pin low power (0 mode)
+pin 18 (emmc2): pin low power (0 mode)
+pin 19 (gpio): pin low power (0 mode)
+		Pad voltage 1800000uV
+		Switching voltage: Disable
+pin 20 (hdmi): pin low power (0 mode)
+pin 21 (hsic): pin low power (0 mode)
+pin 22 (lvds): pin low power (0 mode)
+pin 23 (mipi-bias): pin low power (0 mode)
+pin 24 (pex-bias): pin low power (0 mode)
+pin 25 (pex-clk1): pin low power (0 mode)
+pin 26 (pex-clk2): pin low power (0 mode)
+pin 27 (pex-ctrl): 
+		Pad voltage 1800000uV
+		Switching voltage: Disable
+pin 28 (sdmmc1): pin low power (0 mode)
+		Pad voltage 1800000uV
+		Switching voltage: Enable
+pin 29 (sdmmc3): pin low power (0 mode)
+		Pad voltage 3300000uV
+		Switching voltage: Enable
+pin 30 (spi): pin low power (0 mode)
+		Pad voltage 1800000uV
+		Switching voltage: Disable
+pin 31 (spi-hv): pin low power (0 mode)
+		Pad voltage 1800000uV
+		Switching voltage: Disable
+pin 32 (uart): pin low power (0 mode)
+		Pad voltage 1800000uV
+		Switching voltage: Disable
+pin 33 (usb0): pin low power (0 mode)
+pin 34 (usb1): pin low power (0 mode)
+pin 35 (usb2): pin low power (0 mode)
+pin 36 (usb3): pin low power (0 mode)
+pin 37 (usb-bias): pin low power (0 mode)
+pin 38 (sys): 
+		Pad voltage 1800000uV
+		Switching voltage: Disable
+
+
+
+
+
+amixer -c tegrasndt210ref sset "ADMAIF1 Mux" "I2S4"
+Simple mixer control 'ADMAIF1 Mux',0
+  Capabilities: enum
+  Items: 'None' 'ADMAIF1' 'ADMAIF2' 'ADMAIF3' 'ADMAIF4' 'ADMAIF5' 'ADMAIF6' 'ADMAIF7' 'ADMAIF8' 'ADMAIF9' 'ADMAIF10' 'I2S1' 'I2S2' 'I2S3' 'I2S4' 'I2S5' 'SFC1' 'SFC2' 'SFC3' 'SFC4' 'MIXER1-1' 'MIXER1-2' 'MIXER1-3' 'MIXER1-4' 'MIXER1-5' 'AMX1' 'AMX2' 'AFC1' 'AFC2' 'AFC3' 'AFC4' 'AFC5' 'AFC6' 'OPE1' 'OPE2' 'SPKPROT1' 'MVC1' 'MVC2' 'IQC1-1' 'IQC1-2' 'IQC2-1' 'IQC2-2' 'DMIC1' 'DMIC2' 'DMIC3' 'ADX1-1' 'ADX1-2' 'ADX1-3' 'ADX1-4' 'ADX2-1' 'ADX2-2' 'ADX2-3' 'ADX2-4'
+  Item0: 'I2S4'
+
+
+arecord -D hw:tegrasndt210ref,0 -r 16000 -f S16_LE -c 2 -d 10 test.wav
+arecord: main:788: audio open error: Device or resource busy
+
