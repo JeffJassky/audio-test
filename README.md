@@ -30,3 +30,8 @@ card 1: tegrasndt210ref [tegra-snd-t210ref-mobile-rt565x], device 8: ADMAIF9 CIF
 card 1: tegrasndt210ref [tegra-snd-t210ref-mobile-rt565x], device 9: ADMAIF10 CIF ADMAIF10-9 []
   Subdevices: 1/1
   Subdevice #0: subdevice #0
+
+
+arecord -D hw:tegrasndt210ref,0 -f s24_le -c 2 -r 48000 -d 10 /tmp/i2s4_test.wav
+
+sudo grep "Name:\|J:\|BB:" /sys/kernel/debug/tegra_gpio
